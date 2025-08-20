@@ -19,29 +19,29 @@ class Game:
         res += "\n+" + "--"*(self.COLUMNS - 1) + "-" + "+\n"
         return res
     
-    def check_win(self, piece: str) -> tuple[bool, str | None]:
+    def check_win(self, piece: str) -> tuple[bool, str]:
         """Check if a type of piece has won"""
         for c in range(self.COLUMNS-3):
             for r in range(self.ROWS):
                 if all(self.board[r][c+i] == piece for i in range(4)):
-                    return (True, "hor")
+                    return (True, "horizontaly")
 
         for c in range(self.COLUMNS):
             for r in range(self.ROWS-3):
                 if all(self.board[r+i][c] == piece for i in range(4)):
-                    return (True, "ver")
+                    return (True, "verticaly")
 
         for c in range(self.COLUMNS-3):
             for r in range(self.ROWS-3):
                 if all(self.board[r+i][c+i] == piece for i in range(4)):
-                    return (True, "diag")
+                    return (True, "diagonaly")
 
         for c in range(self.COLUMNS-3):
             for r in range(3, self.ROWS):
                 if all(self.board[r-i][c+i] == piece for i in range(4)):
-                    return (True, "diag")
+                    return (True, "diagonaly")
 
-        return (False, None)
+        return (False, "")
     
     def clear_board(self) -> None:
         """Reset the game to original state"""

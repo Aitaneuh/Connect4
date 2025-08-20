@@ -7,6 +7,8 @@ from players.smart_agent import SmartAgent
 import random
 import time
 
+from graph import draw_graphs
+
 while True:
     mode = int(input("\nChoose what mode you want to play :\n\n\t1. Player vs Player\n\t2. Player vs Agent\n\t3. Agent vs Agent\n\t4. Agent vs Agent with stats\n\nmode selected : "))
     if mode in [1, 2, 3, 4]:
@@ -61,6 +63,10 @@ elif mode == 3 or mode == 4:
     elif agent_selected2 == 2:
         player2 = SmartAgent("Smart guy", "X")
 
+if player1.name == player2.name:
+    player1.name += " 1"
+    player2.name += " 2"
+
 game = Game()
 
 if mode != 4:
@@ -99,6 +105,11 @@ else:
 
         def play_one_game():
             moves = 0
+            first_to_play = random.choice([True, False])
+            if first_to_play:
+                first_player = player1
+            else:
+                first_player = player2
 
             def stat_turn(player: Player) -> bool:
                 nonlocal moves
@@ -108,14 +119,17 @@ else:
                 game.drop_piece(col, player.piece)
                 game_check = game.check_win(player.piece)
                 if game_check[0] != False:
-                    stats.append(Stat(player, moves, game_check[1]))
+                    if player == first_player:
+                        first_res = "yes"
+                    else:
+                        first_res = "no"
+                    stats.append(Stat(player.name, moves, game_check[1], first_res))
                     return True
                 if game.is_board_full():
-                    stats.append(Stat("Draw", moves, None))
+                    stats.append(Stat("Draw", moves, "Draw", "Draw"))
                     return True
                 return False
 
-            first_to_play = random.choice([True, False])
 
             while True:
                 if first_to_play:
@@ -128,6 +142,4 @@ else:
         play_one_game()
         print(f"{i}/{iteration}")
         
-    for stat in stats:
-        print(f"{stat.winner.name} | {stat.moves} | {stat.orentation}")
-
+    draw_graphs(stats)
