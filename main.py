@@ -120,9 +120,9 @@ else:
                 game_check = game.check_win(player.piece)
                 if game_check[0] != False:
                     if player == first_player:
-                        first_res = "yes"
+                        first_res = "Win"
                     else:
-                        first_res = "no"
+                        first_res = "Lose"
                     stats.append(Stat(player.name, moves, game_check[1], first_res))
                     return True
                 if game.is_board_full():
@@ -140,6 +140,6 @@ else:
                     if stat_turn(player1): break
 
         play_one_game()
-        print(f"{i}/{iteration}")
+        print(f"{i+1}/{iteration}")
         
     draw_graphs(stats)
