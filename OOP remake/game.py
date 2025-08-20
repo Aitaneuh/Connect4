@@ -43,7 +43,7 @@ class Game:
 
         return (False, None)
     
-    def reset(self) -> None:
+    def clear_board(self) -> None:
         """Reset the game to original state"""
         self.board = [[self.EMPTY for _ in range(self.COLUMNS)] for _ in range(self.ROWS)]
         return
@@ -70,6 +70,9 @@ class Game:
         for r in range(self.ROWS-1, -1, -1):
             if self.board[r][col] == self.EMPTY:
                 return r
-            
-        # Trash but works
-        return None 
+
+        return None
+    
+    def is_board_full(self) -> bool:
+        """Check if the board is full"""
+        return all(cell != self.EMPTY for row in self.board for cell in row)

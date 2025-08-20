@@ -18,7 +18,7 @@ print(main)
 print(main.check_win("X"))
 
 print_debug_text("reset works")
-main.reset()
+main.clear_board()
 print(main)
 
 # for i in range(6):
@@ -28,8 +28,16 @@ print(main)
 # print(main.is_valid_move(6))
 
 print_debug_text("Drop a piece works")
-main.reset()
+main.clear_board()
 main.drop_piece(1, "X")
-for _ in range(7):
+for _ in range(6):
     main.drop_piece(3, "O")
 print(main)
+
+print_debug_text("is_board_full works")
+main.clear_board()
+for i in range(7):
+    for _ in range(6):
+        main.drop_piece(i, "X")
+print(main)
+print(main.is_board_full())
