@@ -73,7 +73,11 @@ class Game:
 
         return None
     
-    
+
     def is_board_full(self) -> bool:
         """Check if the board is full"""
         return all(cell != self.EMPTY for row in self.board for cell in row)
+    
+    def get_valid_moves(self) -> list:
+        """Return all possible moves"""
+        return [c for c in range(len(self.board[0])) if self.board[0][c] == self.EMPTY]

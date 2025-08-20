@@ -1,7 +1,7 @@
 from player import Player
 
 class HumanPlayer(Player):
-    def get_move(self, board) -> int:
+    def play(self, board: list[list[str]], valid_moves: list[int]) -> int:
         while True:
             try:
                 col = int(input(f"{self.name} ({self.piece}), choose a column: "))

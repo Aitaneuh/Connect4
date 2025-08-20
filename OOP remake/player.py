@@ -6,6 +6,6 @@ class Player:
         self.piece = piece
 
     @abstractmethod
-    def get_move(self, board):
+    def play(self, board: list[list[str]], valid_moves: list[int]) -> int:
         """Return the column index where the player wants to play"""
         pass
