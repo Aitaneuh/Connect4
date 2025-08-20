@@ -5,7 +5,7 @@ class HumanPlayer(Player):
         while True:
             try:
                 col = int(input(f"{self.name} ({self.piece}), choose a column: "))
-                if 0 <= col < len(board[0]):
+                if col in valid_moves:
                     return col
                 else:
                     print("Invalid column. Try again.")

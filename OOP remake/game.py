@@ -13,10 +13,10 @@ class Game:
         """Return the Board formated"""
 
         res = ("\n 0 1 2 3 4 5 6")
-        res += ("\n+" + "--"*(self.COLUMNS) + "-" + "+")
+        res += ("\n+" + "--"*(self.COLUMNS - 1) + "-" + "+")
         for row in self.board:
             res += ("\n|" + "|".join(row) + "|")
-        res += "\n+" + "--"*(self.COLUMNS) + "-" + "+\n"
+        res += "\n+" + "--"*(self.COLUMNS - 1) + "-" + "+\n"
         return res
     
     def check_win(self, piece: str) -> tuple[bool, str | None]:
