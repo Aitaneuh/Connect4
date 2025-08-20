@@ -11,7 +11,7 @@ class Game:
         res += "\n+" + "--"*(6) + "-" + "+\n"
         return res
     
-    def check_win(self, piece) -> tuple[bool, str | None]:
+    def check_win(self, piece: str) -> tuple[bool, str | None]:
         """Check if a type of piece has won"""
         for c in range(7-3):
             for r in range(6):
@@ -40,4 +40,9 @@ class Game:
         self.board = [[" " for cols in range(7)] for rows in range(6)]
         return
 
-
+    def is_valid_move(self, col: int):
+        """Check if a move is valid"""
+        if self.board[0][col] == " ":
+            return True
+        else:
+            return False
