@@ -21,8 +21,15 @@ print_debug_text("reset works")
 main.reset()
 print(main)
 
-for i in range(6):
-    main.board[5-i][6] = "O"
-print_debug_text("is_valid_move works")
+# for i in range(6):
+#     main.board[5-i][6] = "O"
+# print_debug_text("is_valid_move works")
+# print(main)
+# print(main.is_valid_move(6))
+
+print_debug_text("Drop a piece works")
+main.reset()
+main.drop_piece(1, "X")
+for _ in range(7):
+    main.drop_piece(3, "O")
 print(main)
-print(main.is_valid_move(6))
