@@ -34,5 +34,10 @@ class Game:
                     return (True, "diag")
 
         return (False, None)
+    
+    def reset(self) -> None:
+        """Reset the game to original state"""
+        self.board = [[" " for cols in range(7)] for rows in range(6)]
+        return
 
 
