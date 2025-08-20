@@ -68,8 +68,8 @@ def turn(player: Player) -> bool:
     col = player.play(game.board, valid_moves)
     game.drop_piece(col, player.piece)
     if game.check_win(player.piece)[0] != False:
-        print(f"{player.name} won the match")
         print(game)
+        print(f"{player.name} won the match")
         return True
     if game.is_board_full():
         print(game)
