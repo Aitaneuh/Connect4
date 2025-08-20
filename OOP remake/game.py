@@ -73,6 +73,7 @@ class Game:
 
         return None
     
+    
     def is_board_full(self) -> bool:
         """Check if the board is full"""
         return all(cell != self.EMPTY for row in self.board for cell in row)
