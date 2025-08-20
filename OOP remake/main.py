@@ -126,9 +126,8 @@ else:
                     if stat_turn(player1): break
 
         play_one_game()
-        time.sleep(0.1)
-
+        print(f"{i}/{iteration}")
         
     for stat in stats:
-        print(stat)
+        print(f"{stat.winner.name} | {stat.moves} | {stat.orentation}")
 

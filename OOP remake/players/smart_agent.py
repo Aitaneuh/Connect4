@@ -8,36 +8,35 @@ class SmartAgent(Player):
                 return r
 
     def check_critic_move(self, board: list[list[str]], ROWS, COLUMNS, valid_moves: list):
-        piece = "X"
-        for _ in range(2):
+        for piece in ["X", "O"]:
             for col in valid_moves:
                 temp_board = [row[:] for row in board]  # deep copy
                 next_row = self.get_next_open_row(temp_board, col, ROWS)
                 if next_row is None:
                     continue
                 temp_board[next_row][col] = piece
-                for c in range(COLUMNS-3):
-                    for r in range(ROWS):
+
+                for r in range(ROWS):
+                    for c in range(COLUMNS-3):
                         if all(temp_board[r][c+i] == piece for i in range(4)):
-                            return (True, c)
-                        
-                for c in range(COLUMNS):
-                    for r in range(ROWS-3):
+                            return (True, col)
+
+                for r in range(ROWS-3):
+                    for c in range(COLUMNS):
                         if all(temp_board[r+i][c] == piece for i in range(4)):
-                            return (True, c)
+                            return (True, col)
 
-                for c in range(COLUMNS-3):
-                    for r in range(ROWS-3):
+                for r in range(ROWS-3):
+                    for c in range(COLUMNS-3):
                         if all(temp_board[r+i][c+i] == piece for i in range(4)):
-                            return (True, c)
+                            return (True, col)
 
-                for c in range(COLUMNS-3):
-                    for r in range(3, ROWS):
+                for r in range(3, ROWS):
+                    for c in range(COLUMNS-3):
                         if all(temp_board[r-i][c+i] == piece for i in range(4)):
-                            return (True, c)
-                        
-            piece = "O"
+                            return (True, col)
         return (False, None)
+
         
     def play(self, board: list[list[str]], valid_moves: list[int]) -> int:
         res = random.choice(valid_moves)
