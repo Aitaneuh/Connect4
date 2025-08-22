@@ -7,8 +7,8 @@ class SmartAgent(Player):
             if board[r][col] == " ":
                 return r
 
-    def check_critic_move(self, board: list[list[str]], ROWS, COLUMNS, valid_moves: list):
-        for piece in ["X", "O"]:
+    def check_critic_move(self, board: list[list[str]], ROWS, COLUMNS, valid_moves: list, piece: str):
+        for piece_loop in [0,1]:
             for col in valid_moves:
                 temp_board = [row[:] for row in board]  # deep copy
                 next_row = self.get_next_open_row(temp_board, col, ROWS)
@@ -35,6 +35,10 @@ class SmartAgent(Player):
                     for c in range(COLUMNS-3):
                         if all(temp_board[r-i][c+i] == piece for i in range(4)):
                             return (True, col)
+            if piece == "X":
+                piece = "O"
+            else:
+                piece = "X"
         return (False, None)
 
         
@@ -43,7 +47,7 @@ class SmartAgent(Player):
         ROWS = len(board)
         COLUMNS = len(board[0])
 
-        critic_move = self.check_critic_move(board, ROWS, COLUMNS, valid_moves)
+        critic_move = self.check_critic_move(board, ROWS, COLUMNS, valid_moves, self.piece)
         if critic_move[0] == True and isinstance(critic_move[1], int):
             res = critic_move[1]
 
